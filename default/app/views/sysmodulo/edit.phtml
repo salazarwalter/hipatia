@@ -1,0 +1,63 @@
+
+        <div class="row">
+            <div class="col-md-6">
+<div class="card card-secondary">
+              <div class="card-header text-right">
+                <!--<h3 class="card-title">Quick Example</h3>-->
+                <a class="btn btn-primary" href="<?php echo $link_volver?>">Volver</a>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" method="post">
+                  <?php echo Form::hidden("a.id")?>
+                <div class="card-body">
+                  <?php View::content()?>
+                  <div class="form-group">
+                    <label for="a_modulo"> Nombre del Módulo</label>
+                    <?php echo Form::input("text","a.modulo", ' class="form-control" maxlength="30" placeholder="Ingrese el Módulo" ')?>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label for="a_modulo"> Menú del Módulo</label>
+                    <?php echo Form::input("text","a.menu", ' class="form-control" maxlength="26" placeholder="Ingrese texto corto para menú" ')?>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label for="a_descripcion"> Descripción del Módulo</label>
+                    <?php echo Form::input("text","a.descripcion", ' class="form-control" maxlength="250" placeholder="Ingrese la Descripción" ')?>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label for="a_logo"> Icono</label>
+                    <?php echo Form::input("text","a.logo", ' class="form-control" maxlength="60" placeholder="Ingrese el icono" ')?>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label for="a_modulo"> Precio</label>
+                    <?php echo Form::input("text","a.precio", ' class="form-control" maxlength="6" placeholder="Ingrese el Precio" ')?>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label for="a_modulo"> Privado</label>
+                    <?php echo Form::select("a.privado", Modulo::$PRIVADO, ' class="form-control"  ')?>
+                  </div>
+                    
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Modificar</button>
+                </div>
+              </form>
+            </div>
+           </div>
+        </div>
+        <!-- /.row -->
+
+<script>
+  $(function () {
+
+  });
+</script>
+
+

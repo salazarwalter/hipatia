@@ -26,11 +26,11 @@
                   </div>
                   <div class="form-group">
                     <label for="a_controlador_id"> Seleccione Controlador</label>
-                    <?php echo Form::dbSelectCripto("a.controlador_id", NULL,array("controlador","combo_controladorXperfil",array("perfil_id"=>$a->perfil_idx) ),NULL,' class="form-control"')?>
+                    <?php echo Form::dbSelectCripto("a.controlador_id", NULL,array("controlador","combo_controladorXperfil",array("perfil_id"=>$a->perfil_idx) ),NULL,'required class="form-control"')?>
                   </div>
                   <div class="form-group">
                     <label for="a_accion_id"> Seleccione Controlador</label>
-                    <?php echo Form::select("a.accion_id", array(),' class="form-control"')?>
+                    <?php echo Form::select("a.accion_id", array(),' class="form-control" required')?>
                   </div>
                     
 <!--                  <div class="form-group">

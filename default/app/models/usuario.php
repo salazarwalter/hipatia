@@ -24,7 +24,27 @@ class Usuario extends ActiveRecord
             Usuario::$NOMBRE=$x->ape." ".$x->nom;
             
         }
-        
+      
+        public static function tieneAcceso($controlador,$accion)
+        {
+            $sql = "SELECT acceso.permitido 
+                    FROM rol INNER JOIN perfil      ON rol.perfil_id          = perfil.id
+                             INNER JOIN acceso      ON perfil.id              = acceso.perfil_id
+                             INNER JOIN accion      ON acceso.accion_id       = accion.id
+                             INNER JOIN controlador ON accion.controlador_id  = controlador.id
+
+                    WHERE rol.usuario_id           = ".Auth::get("id")." 
+                      AND acceso.permitido         = 'S'
+                      AND accion.accion            = '$accion'
+                      AND controlador.controlador  = '$controlador'
+                    ";
+            $u = new Usuario();
+            $lista = $u->find_all_by_sql($sql);
+            if(count($lista)<1){
+                return FALSE;
+            }
+            return TRUE;
+        }
 	public function initialize()
 	{
 		$this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");

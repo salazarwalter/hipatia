@@ -19,7 +19,10 @@ abstract class AppController extends Controller
 
     final protected function initialize()
     {
-        
+        if(Auth::is_valid())
+        {
+            Usuario::obtenerFotoPerfil();
+        }
     }
 
     final protected function finalize()

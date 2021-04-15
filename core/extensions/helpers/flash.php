@@ -86,7 +86,14 @@ class Flash
      */
     public static function info($text)
     {
-        return self::show('info', $text);
+        ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <i></i><?php echo $text;?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>        
+    <?php
     }
 
     /**
@@ -96,7 +103,14 @@ class Flash
      */
     public static function valid($text)
     {
-        return self::show('valid', $text);
+        ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i></i><?php echo $text;?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>        
+    <?php
     }
 
 }

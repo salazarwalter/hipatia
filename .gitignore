@@ -1,6 +1,7 @@
 vendor
 default/app/temp
 default/public/temp
+default/app/config
 
 # Mac filesystem dust
 .DS_Store

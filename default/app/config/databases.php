@@ -12,11 +12,11 @@ return [
         /**
          * username: usuario con permisos en la base de datos
          */
-        'username' => 'salazarwalter', //no es recomendable usar el usuario root
+        'username' => 'root', //no es recomendable usar el usuario root
         /**
          * password: clave del usuario de la base de datos
          */
-        'password' => 'german',
+        'password' => 'root',
         /**
          * test: nombre de la base de datos
          */
@@ -51,7 +51,7 @@ return [
         /**
          * password: clave del usuario de la base de datos
          */
-        'password' => '',
+        'password' => 'root',
         /**
          * test: nombre de la base de datos
          */

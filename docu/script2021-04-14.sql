@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `acceso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `acceso` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `accion_id` int NOT NULL,
   `perfil_id` int NOT NULL,
-  `principal` varchar(1) DEFAULT NULL COMMENT 'Es  el acceso  principal o  no',
+  `permitido` varchar(1) DEFAULT 'S' COMMENT 'Es  el acceso  principal o  no',
   PRIMARY KEY (`id`),
   UNIQUE KEY `u_accion_perfil` (`accion_id`,`perfil_id`),
   KEY `fk_acceso_accion1_idx` (`accion_id`),
   KEY `fk_acceso_perfil1_idx` (`perfil_id`),
   CONSTRAINT `fk_acceso_accion1` FOREIGN KEY (`accion_id`) REFERENCES `accion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_acceso_perfil1` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `acceso` (
 
 LOCK TABLES `acceso` WRITE;
 /*!40000 ALTER TABLE `acceso` DISABLE KEYS */;
+INSERT INTO `acceso` VALUES (2,1,3,'S'),(3,4,3,'S'),(4,7,3,'N'),(5,6,3,'S'),(6,8,3,'S'),(7,9,3,'S'),(8,5,3,'S'),(9,19,3,'S'),(10,16,3,'S'),(11,11,3,'S'),(12,10,3,'S'),(13,12,3,'S'),(14,13,3,'S'),(15,17,3,'S'),(16,15,3,'S'),(17,14,3,'S'),(18,18,3,'S'),(19,20,3,'S'),(20,21,3,'S'),(21,22,3,'S'),(22,23,3,'S'),(23,24,3,'S'),(24,25,3,'S'),(25,26,3,'S'),(26,28,3,'S'),(27,27,3,'S'),(28,29,3,'S'),(29,30,3,'S'),(30,31,3,'S'),(31,32,3,'S'),(32,33,3,'S'),(33,34,3,'S'),(34,35,3,'S'),(35,41,4,'S');
 /*!40000 ALTER TABLE `acceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +61,7 @@ CREATE TABLE `accion` (
   UNIQUE KEY `u_accion_controlador` (`controlador_id`,`accion`),
   KEY `fk_accion_controlador1_idx` (`controlador_id`),
   CONSTRAINT `fk_accion_controlador1` FOREIGN KEY (`controlador_id`) REFERENCES `controlador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +70,7 @@ CREATE TABLE `accion` (
 
 LOCK TABLES `accion` WRITE;
 /*!40000 ALTER TABLE `accion` DISABLE KEYS */;
+INSERT INTO `accion` VALUES (41,'salir',1),(26,'add',3),(28,'del',3),(27,'edit',3),(29,'index',3),(20,'add',4),(21,'ajax_combo',4),(22,'ajax_lista_controladores',4),(23,'del',4),(24,'edit',4),(25,'index',4),(30,'add',5),(31,'ajax_combo',5),(32,'ajax_lista',5),(33,'del',5),(34,'edit',5),(35,'index',5),(4,'add',6),(7,'ajax_combo',6),(6,'ajax_combo_norepeat',6),(8,'ajax_lista',6),(9,'del',6),(5,'edit',6),(19,'index',6),(1,'select',6),(16,'add',8),(11,'ajax_combo',8),(10,'ajax_combo_norepeat',8),(12,'ajax_lista',8),(13,'del',8),(17,'index',8),(15,'nopermitir',8),(14,'permitir',8),(18,'select',8),(38,'add',9),(40,'del',9),(39,'edit',9),(37,'index',9),(36,'select',9);
 /*!40000 ALTER TABLE `accion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +89,7 @@ CREATE TABLE `controlador` (
   UNIQUE KEY `u_perfil_controlador` (`perfil_id`,`controlador`),
   KEY `fk_controlador_perfil1_idx` (`perfil_id`),
   CONSTRAINT `fk_controlador_perfil1` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +98,7 @@ CREATE TABLE `controlador` (
 
 LOCK TABLES `controlador` WRITE;
 /*!40000 ALTER TABLE `controlador` DISABLE KEYS */;
-INSERT INTO `controlador` VALUES (6,'sysaccion',3),(4,'syscontrolador',3),(3,'sysmodulo',3),(5,'sysperfil',3),(1,'sysusuario',4),(7,'publicadorxxxx',5);
+INSERT INTO `controlador` VALUES (8,'sysacceso',3),(6,'sysaccion',3),(4,'syscontrolador',3),(9,'sysmenu',3),(3,'sysmodulo',3),(5,'sysperfil',3),(1,'sysusuario',4),(7,'publicador',5);
 /*!40000 ALTER TABLE `controlador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +124,7 @@ CREATE TABLE `menu` (
   KEY `fk_menu_accion1_idx` (`accion_id`),
   CONSTRAINT `fk_menu_accion1` FOREIGN KEY (`accion_id`) REFERENCES `accion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_menu_perfil1` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,6 +133,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'Módulos','fas fa-brain','text-success',3,1,29),(2,'Controladores','fas fa-gamepad','text-danger',3,2,25),(3,'Perfiles','fas fa-user-tag','text-info',3,0,35),(4,'Acciones','fas fa-radiation-alt','text-warning',3,3,1),(5,'Accesos','fas fa-low-vision','text-yellow',3,5,18),(6,'Menues','fab fa-elementor','text-lightblue',3,6,36);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +155,7 @@ CREATE TABLE `modulo` (
   `menu` varchar(26) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `u_modulo` (`modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +183,7 @@ CREATE TABLE `perfil` (
   UNIQUE KEY `u_perfil_modulo` (`perfil`,`modulo_id`),
   KEY `fk_perfil_modulo1_idx` (`modulo_id`),
   CONSTRAINT `fk_perfil_modulo1` FOREIGN KEY (`modulo_id`) REFERENCES `modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +192,7 @@ CREATE TABLE `perfil` (
 
 LOCK TABLES `perfil` WRITE;
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
-INSERT INTO `perfil` VALUES (4,'Admin DP',2),(2,'Administrador DP',2),(3,'Administrador Ingresos',1),(5,'Seguidor',3);
+INSERT INTO `perfil` VALUES (4,'Admin DP',2),(3,'Administrador Ingresos',1),(5,'Seguidor',3);
 /*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +218,7 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`id`),
   KEY `fk_persona_usuario_idx` (`usuario_id`),
   CONSTRAINT `fk_persona_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,6 +227,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES (1,'Salazar','Walter',NULL,NULL,NULL,NULL,'+54','2021-04-14',1,'salazarwalter@gmail.com');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +249,7 @@ CREATE TABLE `rol` (
   KEY `fk_rol_perfil1_idx` (`perfil_id`),
   CONSTRAINT `fk_rol_perfil1` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_rol_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,6 +258,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (2,1,3,'S'),(3,1,4,'S');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +276,7 @@ CREATE TABLE `usuario` (
   `usuario_at` datetime DEFAULT NULL,
   `foto` varchar(60) DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-10  8:46:59
+-- Dump completed on 2021-04-14 11:15:14

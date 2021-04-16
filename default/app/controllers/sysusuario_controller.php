@@ -17,7 +17,9 @@ class SysusuarioController extends AppController
             if ($usu->login())
                 {
                     Redirect::to("../../sysmodulo/index");
-                    Session::set("entrada", "s");
+                    Session::set("uno", "2");
+                    Session::set("dos", "2");
+                    
                 } 
                 else 
                 {

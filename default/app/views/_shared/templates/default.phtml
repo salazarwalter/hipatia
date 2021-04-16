@@ -65,8 +65,19 @@
 <script src="<?php echo PUBLIC_PATH?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo PUBLIC_PATH?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
-    <script src="<?php echo PUBLIC_PATH?>plugins/dist/js/adminlte.js"></script>
+    <script src="<?php echo PUBLIC_PATH?>plugins/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo PUBLIC_PATH?>plugins/dist/js/demo.js"></script>
+<!--<script>
+    var url = window.location;
+const allLinks = document.querySelectorAll('.nav-item a');
+const currentLink = [...allLinks].filter(e => {
+  return e.href == url;
+});
+
+currentLink[0].classList.add("active")
+currentLink[0].closest(".nav-treeview").style.display="block";
+currentLink[0].closest(".has-treeview").classList.add("active");
+</script>-->
 </body>
 </html>

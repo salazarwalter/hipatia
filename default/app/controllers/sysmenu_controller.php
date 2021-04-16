@@ -179,4 +179,15 @@ class SysmenuController extends AppController
         }
     }
 
+    public function ajax_opciones() {
+        View::template(null);
+        if(Input::hasGet("uno"))
+        {
+            $uno = Input::get("uno");
+            $dos = Input::get("dos");
+            Session::set("uno", $uno);
+            Session::set("dos", $dos);
+        }
+        die();
+    }
 }

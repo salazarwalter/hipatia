@@ -139,5 +139,46 @@ class Menu extends ActiveRecord
                         WHERE menu.perfil_id = $perfil_id ";
         return $this->find_all_by_sql($sqlQuery);
     }
+    
+    //lista de modulos y menúes de un usuario en sesion
+    
+    public static function listaGeneralMenus() {
+        $sql = "SELECT 
+                        modulo.modulo,
+                        perfil.perfil,
+                        perfil.modulo_id,
+                        menu.texto,
+                        menu.icono,
+                        menu.color,
+                        menu.posicion,
+                        accion.accion,
+                        controlador.controlador
+                FROM rol INNER JOIN perfil      ON rol.perfil_id         = perfil.id
+                         INNER JOIN modulo      ON perfil.modulo_id      = modulo.id
+                         INNER JOIN menu        ON menu.perfil_id        = perfil.id
+                         INNER JOIN accion      ON menu.accion_id        = accion.id
+                         INNER JOIN controlador ON accion.controlador_id = controlador.id
+                         INNER JOIN acceso      ON acceso.accion_id      = accion.id
+                WHERE rol.usuario_id   = ".Auth::get("id")." 
+                  AND rol.activo       = 'S'
+                  AND acceso.permitido = 'S'
+
+                ORDER BY modulo.modulo, perfil.perfil, menu.posicion
+                ";
+        $menu=new Menu();
+        Menu::$LISTA_GRAL_MENUES = $menu->find_all_by_sql($sql);
+        $inicio="";
+        foreach (Menu::$LISTA_GRAL_MENUES as $value) {
+            if($inicio!=$value->modulo)
+            {
+                $inicio=$value->modulo;
+                Menu::$LISTA_GRAL_MODULOS[]=$inicio;
+            }
+        }
+        return Menu::$LISTA_GRAL_MENUES;
+    }
+    
+    public static $LISTA_GRAL_MENUES=array();
+    public static $LISTA_GRAL_MODULOS=array();
 }
  ?>

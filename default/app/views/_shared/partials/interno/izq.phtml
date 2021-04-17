@@ -14,10 +14,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo Usuario::$FOTO?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo Usuario::$NOMBRE?></a>
         </div>
       </div>
 
@@ -27,13 +27,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-                <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal-sm">
-                  <i class="fas fa-door-closed"></i> Cerrar Sesión
+                <button type="button" class="btn  btn-block btn-link" data-toggle="modal" data-target="#modal-sm">
+                  <!--<i class="fas fa-door-closed"></i>--> 
+                  Cerrar Sesión
                 </button>
           </li>
 
           
-          <li class="nav-item has-treeview">
+<!--          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -41,6 +42,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+              
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../../index.html" class="nav-link">
@@ -61,8 +63,75 @@
                 </a>
               </li>
             </ul>
+          </li>-->
+     <?php $lista= Menu::listaGeneralMenus();
+     $uno = Session::get("uno");
+     $dos = Session::get("dos");
+//     Session::delete("entrada");
+     $i=0;
+     foreach (Menu::$LISTA_GRAL_MODULOS as $modulo) 
+     { $i++;
+          ?>
+          <li class="nav-item has-treeview<?php echo $uno==$i?" menu-open":""?>">
+              <!--<a href="#" class="nav-link<?php echo $uno==$i?" active":""?>" onclick="return modulo('<?php echo $i?>')">-->
+              <a href="#" class="nav-link<?php echo $uno==$i?" active":""?> " >
+              <i class="nav-icon fas fa-play text-info"></i>
+              <p>
+                <?php echo $modulo?>
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php 
+              $j=0;
+              foreach ($lista as $value) {
+                if($value->modulo == $modulo)
+                { $j++;
+                    ?>
+                        <li class="nav-item">
+                          <a href="<?php echo PUBLIC_PATH.'../../'.$value->controlador.'/'.$value->accion?>" 
+                             class="nav-link<?php echo ($j==$dos && $uno==$i)?" active":""?>" onclick="return accion(this,<?php echo $i?>,<?php echo $j?>)">
+                            <i class="<?php echo $value->icono?> <?php echo $value->color?> nav-icon"></i>
+                            <p><?php echo $value->texto?></p>
+                          </a>
+                        </li>
+
+                    <?php
+                    $entrada="N";
+                }
+              }?>
+            </ul>
           </li>
-          <li class="nav-item">
+         <?php 
+//         }
+     }
+     ?>     
+          
+     <script>     
+     let uno,dos;
+          
+          function modulo(mod)
+          {
+              console.log(mod);
+          }
+          function accion(e,i,j)
+          {
+//             e.stopPropagation(); 
+//                e.preventDefault();
+//              e.preventDefault();
+              console.log(i+" "+j);
+              let url = "<?php echo PUBLIC_PATH?>../../sysmenu/ajax_opciones";
+              let datos={"uno": i,"dos": j };
+              $.get(url,datos, function (res){
+//                  console.log(res);
+                  window.location=e.href;
+              });
+//              console.log(e.href);
+            return false;
+          }
+     </script>     
+          
+<!--          <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -70,8 +139,8 @@
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview">
+          </li>-->
+<!--          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -124,7 +193,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
           <!--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -215,7 +284,7 @@
             </ul>
           </li>
           -->
-          <li class="nav-item has-treeview menu-open">
+<!--          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -249,8 +318,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li>-->
+<!--          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -278,7 +347,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
 <!--          <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="../calendar.html" class="nav-link">
@@ -470,7 +539,7 @@
             </ul>
           </li>
           -->
-          <li class="nav-item">
+<!--          <li class="nav-item">
             <a href="https://adminlte.io/docs/3.0" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
@@ -511,15 +580,33 @@
               <i class="nav-icon far fa-circle text-fuchsia"></i>
               <p>Menús</p>
             </a>
-          </li>
+          </li>-->
 
-          <li class="nav-header">MI PERFIL</li>
+<!--          <li class="nav-header">MI PERFIL</li>
+          <li class="nav-item">
+            <a href="<?php echo PUBLIC_PATH?>../../sysusuario/foto" class="nav-link">
+              <i class="nav-icon fas fa-camera text-green"></i>
+              <p>Foto Perfil</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo PUBLIC_PATH?>../../sysusuario/quitarfoto" class="nav-link">
+              <i class="nav-icon fas fa-camera text-red"></i>
+              <p>Quitar Foto Perfil</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo PUBLIC_PATH?>../../sysusuario/datos" class="nav-link">
+              <i class="nav-icon fas fa-server text-green"></i>
+              <p>Datos Personales</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="<?php echo PUBLIC_PATH?>../../sysusuario/clave" class="nav-link">
               <i class="nav-icon far fas fa-key text-green"></i>
               <p>Cambiar Clave</p>
             </a>
-          </li>
+          </li>-->
 <!--          <li class="nav-item">
                 <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal-sm">
                   <i class="fas fa-door-closed"></i> Cerrar Sesión

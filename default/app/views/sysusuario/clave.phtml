@@ -13,15 +13,15 @@
                   <?php View::content()?>
                   <div class="form-group">
                     <label for="clave1">Contraseña Actual</label>
-                    <?php echo Form::input("password","clave1", ' class="form-control" maxlength="30" placeholder="Ingrese Clave Actual" ')?>
+                    <?php echo Form::input("password","clave1", ' class="form-control" maxlength="30" placeholder="Ingrese Clave Actual" required')?>
                   </div>
                   <div class="form-group">
                     <label for="clave2">Nueva Contraseña </label>
-                    <?php echo Form::input("password","clave2", ' class="form-control" maxlength="30" placeholder="Ingrese la Nueva Clave" ')?>
+                    <?php echo Form::input("password","clave2", ' class="form-control" maxlength="30" placeholder="Ingrese la Nueva Clave" required')?>
                   </div>
                   <div class="form-group">
                     <label for="clave3">Repita Contraseña </label>
-                    <?php echo Form::input("password","clave3", ' class="form-control" maxlength="30" placeholder="Repita la Nueva Clave" ')?>
+                    <?php echo Form::input("password","clave3", ' class="form-control" maxlength="30" placeholder="Repita la Nueva Clave" required')?>
                   </div>
                     
                 </div>

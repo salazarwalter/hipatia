@@ -65,16 +65,13 @@
             </ul>
           </li>-->
      <?php $lista= Menu::listaGeneralMenus();
-     $uno = Session::get("uno");
-     $dos = Session::get("dos");
-//     Session::delete("entrada");
-     $i=0;
+     $entrada= Session::get("entrada");
+     Session::delete("entrada");
      foreach (Menu::$LISTA_GRAL_MODULOS as $modulo) 
-     { $i++;
+     { 
           ?>
-          <li class="nav-item has-treeview<?php echo $uno==$i?" menu-open":""?>">
-              <!--<a href="#" class="nav-link<?php echo $uno==$i?" active":""?>" onclick="return modulo('<?php echo $i?>')">-->
-              <a href="#" class="nav-link<?php echo $uno==$i?" active":""?> " >
+          <li class="nav-item has-treeview<?php echo $entrada=="s"?" menu-open":""?>">
+            <a href="#" class="nav-link<?php echo $entrada=="s"?" active":""?>">
               <i class="nav-icon fas fa-play text-info"></i>
               <p>
                 <?php echo $modulo?>
@@ -83,14 +80,12 @@
             </a>
             <ul class="nav nav-treeview">
               <?php 
-              $j=0;
               foreach ($lista as $value) {
                 if($value->modulo == $modulo)
-                { $j++;
+                {
                     ?>
                         <li class="nav-item">
-                          <a href="<?php echo PUBLIC_PATH.'../../'.$value->controlador.'/'.$value->accion?>" 
-                             class="nav-link<?php echo ($j==$dos && $uno==$i)?" active":""?>" onclick="return accion(this,<?php echo $i?>,<?php echo $j?>)">
+                          <a href="<?php echo PUBLIC_PATH.'../../'.$value->controlador.'/'.$value->accion?>" class="nav-link<?php echo $entrada=="s"?" active":""?>">
                             <i class="<?php echo $value->icono?> <?php echo $value->color?> nav-icon"></i>
                             <p><?php echo $value->texto?></p>
                           </a>
@@ -107,29 +102,10 @@
      }
      ?>     
           
-     <script>     
-     let uno,dos;
           
-          function modulo(mod)
-          {
-              console.log(mod);
-          }
-          function accion(e,i,j)
-          {
-//             e.stopPropagation(); 
-//                e.preventDefault();
-//              e.preventDefault();
-              console.log(i+" "+j);
-              let url = "<?php echo PUBLIC_PATH?>../../sysmenu/ajax_opciones";
-              let datos={"uno": i,"dos": j };
-              $.get(url,datos, function (res){
-//                  console.log(res);
-                  window.location=e.href;
-              });
-//              console.log(e.href);
-            return false;
-          }
-     </script>     
+          
+          
+          
           
 <!--          <li class="nav-item">
             <a href="../widgets.html" class="nav-link">

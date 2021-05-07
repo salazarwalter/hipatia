@@ -34,8 +34,7 @@ class Usuario extends ActiveRecord
                              INNER JOIN controlador ON accion.controlador_id  = controlador.id
 
                     WHERE rol.usuario_id           = ".Auth::get("id")." 
-                      AND acceso.permitido         = 'S' 
-                      AND rol.activo               = 'S' 
+                      AND acceso.permitido         = 'S'
                       AND accion.accion            = '$accion'
                       AND controlador.controlador  = '$controlador'
                     ";

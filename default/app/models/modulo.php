@@ -5,24 +5,27 @@
  */
 class Modulo extends ActiveRecord
 {
-    public static $PRIVADO =array("N"=>"NO","S"=>"SI");
+    public static $PRIVADO   = array("N"=>"NO","S"=>"SI");
+    public static $INICIAL   = array("N"=>"NO","S"=>"SI");
+    public static $PUBLICADO = array("N"=>"NO","S"=>"SI");
 
     public function initialize()
 	{
             $this->validates_presence_of("modulo",array("message"=>"Debe Ingresar el nombre del Módulo"));
-            $this->validates_presence_of("menu",array("message"=>"Debe Ingresar el Texto del Menú"));
-            $this->validates_uniqueness_of("modulo",array("message"=>"Módulo ya ingresado"));
+            $this->validates_presence_of("link",array("message"=>"Debe Ingresar el Link Del Video"));
             $this->validates_presence_of("descripcion",array("message"=>"Debe Ingresar La Descripción del Módulo"));
             $this->validates_presence_of("logo",array("message"=>"Debe Ingresar la clase fa fa-xxx de font awesome"));
-            $this->validates_presence_of("precio",array("message"=>"El precio debe ser numérico"));
+            $this->validates_uniqueness_of("modulo",array("message"=>"Módulo ya ingresado"));
 	}
         
     public function agregar($vec) {
         $vec["modulo"] = trim($vec["modulo"]);
         $vec["descripcion"] = trim($vec["descripcion"]);
         $vec["logo"] = trim($vec["logo"]);
-        $vec["menu"] = trim($vec["menu"]);
-        $vec["precio"] = (float)$vec["precio"];
+        $vec["link"] = trim($vec["link"]);
+        $vec["inicial"] = trim($vec["inicial"]);
+        $vec["publicado"] = trim($vec["publicado"]);
+        $vec["privado"] = trim($vec["privado"]);
         try{
         if(!$this->create($vec))
         {
@@ -33,8 +36,6 @@ class Modulo extends ActiveRecord
             if($this->db->id_connection->errno==1062){
                 Flash::error("Ya se Ingresó este Módulo");
             }
-//            else
-//                Flash::error();
             return FALSE;
         }
         return TRUE;
@@ -45,18 +46,14 @@ class Modulo extends ActiveRecord
         $vec["modulo"] = trim($vec["modulo"]);
         $vec["descripcion"] = trim($vec["descripcion"]);
         $vec["logo"] = trim($vec["logo"]);
-        $vec["precio"] = (float)$vec["precio"];
-        $vec["menu"] = trim($vec["menu"]);
+        $vec["link"] = trim($vec["link"]);
+        $vec["inicial"] = trim($vec["inicial"]);
+        $vec["publicado"] = trim($vec["publicado"]);
+        $vec["privado"] = trim($vec["privado"]);
         
         if(!$vec["id"])
         {
             Flash::error("ID Obj No Hallado");
-            return false;
-        }
-        
-        if($vec["precio"]<0)
-        {
-            Flash::error("El Precio no puede ser menor que cero");
             return false;
         }
         
@@ -70,8 +67,6 @@ class Modulo extends ActiveRecord
             if($this->db->id_connection->errno==1062){
                 Flash::error("Ya se Ingresó este Módulo");
             }
-//            else
-//                Flash::error();
             return FALSE;
         }
         return TRUE;
@@ -114,8 +109,6 @@ class Modulo extends ActiveRecord
         }
         $mod =new Modulo();
         $h = $mod->find("id=".$modulo_id);
-//        print_r($h);
-//        die();
         if(count($h)==0)
         {
             Flash::error("Obj Modulo No Hallado");

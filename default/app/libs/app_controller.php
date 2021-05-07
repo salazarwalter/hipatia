@@ -21,14 +21,14 @@ abstract class AppController extends Controller
     {
         if(Auth::is_valid()) //esta autenticado?
         {
-            $con = $this->controller_name;
-            $act = $this->action_name;
-            if(!Usuario::tieneAcceso($con,$act))
-            {
-                die("No tiene acceso $con $act");
-            }
-            Usuario::obtenerFotoPerfil();
-            $menu = new Menu() ;
+//            $con = $this->controller_name;
+//            $act = $this->action_name;
+//            if(!Usuario::tieneAcceso($con,$act))
+//            {
+//                die("No tiene acceso $con $act");
+//            }
+//            Usuario::obtenerFotoPerfil();
+//            $menu = new Menu() ;
             
         }
     }

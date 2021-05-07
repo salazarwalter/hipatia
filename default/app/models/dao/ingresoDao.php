@@ -51,10 +51,6 @@ class IngresoDao {
             $this->message="Las claves debe ser iguales";
             return FALSE;
         }
-//        if ($vector["pais_id"]<=0) {
-//            $this->message="Debe Seleccionar un Pais";
-//            return FALSE;
-//        }
         
 //        if(!$this->validarCaptcha()){
 //            $this->message="El CAPTCHA No es valido (prueba del robot)";
@@ -128,7 +124,7 @@ class IngresoDao {
         return FALSE;
     }
     private function htmlBody() {
-        Load::lib("crypto");
+        //Load::lib("crypto");
 
         //$text= Crypto::encriptar("{$this->id}");
         return "<div style='background-color: #b2a7f8; padding: 20px;'>
@@ -242,7 +238,7 @@ public function registroSatisfactorio($parametros)
     public function ingresar($vector) {
         $mail      = trim($vector["mail"]);
         $clave     = trim($vector["clave"]);
-
+        
         if(empty($mail)||empty($clave)){
             Flash::error("Faltan datos Para Ingresar");
             return FALSE;
@@ -257,20 +253,15 @@ public function registroSatisfactorio($parametros)
         }
 
         $clave   = base64_encode($clave);
+
         if(! $this->autentificacion($mail, $clave)){
             Flash::error("USUARIO NO RECONOCIDO POR EL SISTEMA");
             return FALSE;
         }
-//        if(Auth::get("confirmado")!="S"){
-//            Flash::error("Por Favor, Ingrese a su correo electr&oacute;nico y Confirma el Email...");
-//            Auth::destroy_identity();
-//            return FALSE;
-//        }
         return TRUE;
     }
     
     private function autentificacion($mail,$clave) {
-        
         $auth = new Auth("model", "class: usuario", "usu: $mail", "cla: $clave");
         return $auth->authenticate();
     }

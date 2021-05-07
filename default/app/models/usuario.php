@@ -9,6 +9,8 @@ class Usuario extends ActiveRecord
         public static $FOTO="";
         public static $NOMBRE="";
 
+        public static $LINK_CONFIRMAR="http://localhost/sbase2/sysingreso/confirmar";
+        
         public static function obtenerFotoPerfil() {
             $u = new Usuario();
             $usu = $u->find_by_id(Auth::get("id"));

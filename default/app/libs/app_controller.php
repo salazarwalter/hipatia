@@ -30,6 +30,12 @@ abstract class AppController extends Controller
 //            Usuario::obtenerFotoPerfil();
 //            $menu = new Menu() ;
             
+        }else{
+            if($this->controller_name=="index"      || $this->action_name=="index"                       ||
+               $this->controller_name=="sysusuario" || $this->action_name=="registro"                    ||
+               $this->controller_name=="sysusuario" || $this->action_name=="confirmacionSatisfactoria"   ||
+               $this->controller_name=="sysusuario" || $this->action_name=="confirmacionFallida"         ||
+               $this->controller_name=="sysusuario" || $this->action_name=="ingresar"    ){}
         }
     }
 

@@ -119,6 +119,14 @@ class Modulo extends ActiveRecord
         
         return $h[0];
     }
-    
+    public function perfilesIniciales() {
+        $sql = "SELECT perfil.id as perfil_id 
+                FROM modulo INNER JOIN perfil ON perfil.modulo_id = modulo.id
+                WHERE modulo.inicial   ='S'
+                  AND modulo.publicado ='S'
+                  AND perfil.`admin`   ='S'
+                ";
+        return $this->find_all_by_sql($sql);
+    }
 }
  ?>

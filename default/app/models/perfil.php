@@ -5,6 +5,7 @@
  */
 class Perfil extends ActiveRecord
 {
+    public static $ADMIN=array("N"=>"NO","S"=>"SI");
 
 	public function initialize()
 	{
@@ -15,11 +16,24 @@ class Perfil extends ActiveRecord
 //		      "too_long: El nombre debe tener maximo 40 caracteres"
 //		   );
         $this->validates_presence_of("perfil", array("message"=>"Debe Ingresar el Perfil"));
+        $this->validates_presence_of("precio", array("message"=>"Debe Ingresar el Precio"));
+        $this->validates_presence_of("admin", array("message"=>"Debe Indicar si es un perfil Administrador"));
 	}
 
     public function agregar($vec) {
         $vec["modulo_id"] = (int)trim($vec["modulo_id"]);
         $vec["perfil"]    = trim($vec["perfil"]);
+        $vec["admin"]    = trim($vec["admin"]);
+        $vec["precio"]    = (float)trim($vec["precio"]);
+        if($vec["modulo_id"]<=0){
+            Flash::error("Id de Modulo Incorecto");
+            return FALSE;
+        }
+        if($vec["precio"]<0){
+            Flash::error("El precio No puede ser menor que cero");
+            return FALSE;
+        }
+        
         try{
         if(!$this->create($vec))
         {
@@ -38,8 +52,19 @@ class Perfil extends ActiveRecord
     
     public function modificar($vec) {
         $vec["id"]          = (int)trim($vec["id"]);
-        $vec["modulo_id"]   = (int)trim($vec["modulo_id"]);
-        $vec["perfil"]      = trim($vec["perfil"]);
+        $vec["modulo_id"] = (int)trim($vec["modulo_id"]);
+        $vec["perfil"]    = trim($vec["perfil"]);
+        $vec["admin"]    = trim($vec["admin"]);
+        $vec["precio"]    = (float)trim($vec["precio"]);
+        if($vec["modulo_id"]<=0){
+            Flash::error("Id de Modulo Incorecto");
+            return FALSE;
+        }
+        if($vec["precio"]<0){
+            Flash::error("El precio No puede ser menor que cero");
+            return FALSE;
+        }
+        
         if($vec["id"] <= 0)
         {
             Flash::error("ID COntrolador No definido");

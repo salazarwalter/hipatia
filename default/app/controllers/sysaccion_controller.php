@@ -46,7 +46,6 @@ class SysaccionController extends AppController
             $obj = new Accion();
             $vec = Input::post("a");
             $x_perfil_id           =  $vec["perfil_id"];
-            //$x_modulo_id      =  $vec["modulo_id"];
             $vec["perfil_id"]      = Crypto::d($vec["perfil_id"]);
             $vec["controlador_id"] = Crypto::d($vec["controlador_id"]);
 //            die($vec["perfil_id"]);

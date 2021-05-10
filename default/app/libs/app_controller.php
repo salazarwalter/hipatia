@@ -21,21 +21,26 @@ abstract class AppController extends Controller
     {
         if(Auth::is_valid()) //esta autenticado?
         {
-//            $con = $this->controller_name;
-//            $act = $this->action_name;
-//            if(!Usuario::tieneAcceso($con,$act))
-//            {
-//                die("No tiene acceso $con $act");
-//            }
-//            Usuario::obtenerFotoPerfil();
-//            $menu = new Menu() ;
+            $con = $this->controller_name;
+            $act = $this->action_name;
+            if(!Usuario::tieneAcceso($con,$act))
+            {
+                die("No tiene acceso $con $act");
+            }
+            Usuario::obtenerFotoPerfil();
+            $menu = new Menu() ;
             
         }else{
-            if($this->controller_name=="index"      || $this->action_name=="index"                       ||
-               $this->controller_name=="sysusuario" || $this->action_name=="registro"                    ||
-               $this->controller_name=="sysusuario" || $this->action_name=="confirmacionSatisfactoria"   ||
-               $this->controller_name=="sysusuario" || $this->action_name=="confirmacionFallida"         ||
-               $this->controller_name=="sysusuario" || $this->action_name=="ingresar"    ){}
+            if($this->controller_name == "index"       && $this->action_name   == "index"                       ||
+               $this->controller_name == "sysingreso"  && $this->action_name   == "registro"                    ||
+               $this->controller_name == "sysusuario"  && $this->action_name   == "confirmacionSatisfactoria"   ||
+               $this->controller_name == "sysusuario"  && $this->action_name   == "confirmacionFallida"         ||
+               $this->controller_name == "sysingreso"  && $this->action_name   == "ingresar"    ){
+               }
+               else{
+                   Redirect::to("../../");
+                   die();
+               }
         }
     }
 

@@ -2,11 +2,6 @@
 <div class="row m-1">
     <div class="col-md-3 offset-md-3">
         <div class="card card-primary">
-            <!--              <div class="card-header">
-                              &nbsp;
-                            <a class="btn btn-primary" href="<?php //echo $link_volver ?>">Volver</a>
-                          </div>-->
-            <!-- /.card-header -->
             <!-- form start -->
             <div class="card-body">
                 <?php View::content() ?>
@@ -20,7 +15,7 @@
 
                 <h3 class="profile-username text-center"><?php echo Usuario::$NOMBRE?></h3>
 
-                <p class="text-muted text-center"><?php echo base64_decode(Auth::get("usu"))?></p>
+                <p class="text-muted text-center"><?php echo Auth::get("usu")?></p>
                     <div class="row">
                         <?php Flash::error("Confirma quitar esta foto de perfil? En su lugar aparecerá el avatar por defecto del sistema")?>
                     </div>

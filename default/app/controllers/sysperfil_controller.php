@@ -119,4 +119,42 @@ class SysperfilController extends AppController
         }
     }
     
+    public function ajax_perfiles_contratados() {
+        View::template(NULL);
+        $this->lista = FALSE;
+        if(Input::hasPost("mod_id"))
+        {
+            $mod_id = (int)Crypto::d(trim(Input::post("mod_id")));
+            $perfil = new Perfil();
+            $this->lista = $perfil->ajax_perfiles_contratados($mod_id);
+        }
+    }
+    public function ajax_modulo_del() {
+        View::template(NULL);
+        if(Input::post("modulo_id")){
+            $modulo_id = (int)Crypto::d(Input::post("modulo_id"));
+            
+            $perfil = new Perfil();
+            $perfil->desactivarPerfil($modulo_id);
+            
+        }
+        die();
+    }
+    
+    public function ajax_modulo_add() {
+        View::template(NULL);
+        $vector=array("error"=>"N");
+        if(Input::post("modulo_id")){
+            $modulo_id = Crypto::d(Input::post("modulo_id"));
+            
+            $perfil = new Perfil();
+            
+            $res=$perfil->adquirirModulo($modulo_id);
+            if(!$res){
+                $vector=array("error"=>"S","titulo"=>$perfil->mensaje);
+            }
+        }
+        die(json_encode($vector,JSON_OBJECT_AS_ARRAY));
+    }
+    
 }

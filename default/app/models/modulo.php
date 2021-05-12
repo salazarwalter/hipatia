@@ -128,5 +128,34 @@ class Modulo extends ActiveRecord
                 ";
         return $this->find_all_by_sql($sql);
     }
+    
+    public function disponibles() {
+        $sql = "SELECT * FROM modulo 
+                WHERE id NOT IN (
+                                 SELECT modulo.id 
+                                 FROM modulo INNER JOIN perfil ON perfil.modulo_id = modulo.id
+                                             INNER JOIN rol    ON rol.perfil_id    = perfil.id
+                                 WHERE rol.usuario_id = ".Auth::get("id")." 
+                                   AND rol.activo     = 'S'  
+                                ) 
+               -- AND modulo.publicado = 'S'
+               -- AND modulo.privado   ='N'
+                ";
+//        die($sql);
+        return $this->find_all_by_sql($sql);
+    }
+    
+    
+    public function contratados() {
+        $sql = " SELECT modulo.* 
+                 FROM modulo INNER JOIN perfil ON perfil.modulo_id = modulo.id
+                             INNER JOIN rol    ON rol.perfil_id    = perfil.id
+                 WHERE rol.usuario_id = ".Auth::get("id")." 
+                   AND rol.activo='S'   
+                ";
+        return $this->find_all_by_sql($sql);
+    }
+    
+    
 }
  ?>

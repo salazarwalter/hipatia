@@ -11,10 +11,10 @@
                         $indice=99;
                         foreach ($lista as $value) { $indice++;?>
                         <div class="col-md-4" id="panel<?php echo $indice?>">
-                            <div class="card card-blue">
+                            <div class="card">
                                   <div class="card-header">
                                     <h3 class="card-title">
-                                        <i class="fas fa-play text-warning"> </i>
+                                        <i class="fas fa-play text-primary"> </i>
                                         <span class="text-bold"><?php echo $value->modulo?></span>
                                     </h3>
                                   </div>
@@ -91,7 +91,7 @@
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
 <!--        <button type="button" class="btn btn-primary">Save changes</button>-->
       </div>
     </div>
@@ -143,8 +143,9 @@
    function  verPerfiles(mod_id)
    {
       let modulo_id = mod_id;
-      let url= "<?php echo PUBLIC_PATH?>../../sysperfil/ajax_lista_mimodulo";
-      let datos = {"modulo_id": modulo_id};
+      let url= "<?php echo PUBLIC_PATH?>../../sysperfil/ajax_perfiles_contratados";
+      let datos = {"mod_id": modulo_id};
+//      console.log(datos);
       $.post(url,datos,function (resul){
           console.log(resul);
           $("#cuerpo").html(resul);
@@ -169,10 +170,17 @@
         
          $.post(url,datos,function (resul){
             console.log(resul);
-            let objeto_id = "panel"+$("#objeto_id").val();
-//            console.log(objeto_id);
-            $('#'+objeto_id).hide(); //oculto mediante id
-
+            console.log(JSON.parse(resul) );
+            let obj=JSON.parse(resul);
+            console.log(obj.error );
+            if(obj.error=="S"){
+                console.log("mostrar mensaje");
+                toastr.error(obj.titulo);
+            }else{
+                let objeto_id = "panel"+$("#objeto_id").val();
+    //            console.log(objeto_id);
+                $('#'+objeto_id).hide(); //oculto mediante id
+            }
             $("#exampleConfirmacion").modal("hide");
          });
    }

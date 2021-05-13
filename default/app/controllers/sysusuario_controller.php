@@ -8,32 +8,30 @@ class SysusuarioController extends AppController
 {
 
 
-    public function login()
-    {
-    	View::template("default_1");
-        if(Input::hasPost("usu"))
-        {
-            $usu =new Usuario();
-            if ($usu->login())
-                {
-                    Redirect::to("../../sysmodulo/index");
-                    Session::set("uno", "2");
-                    Session::set("dos", "2");
-                    
-                } 
-                else 
-                {
-                    Flash::error("Usuario no reconocido por el sistema");
-                }            
-
-        }
-    }
-    
-    public function salir() {
-        Auth::destroy_identity();
-        Redirect::to("../../");
-        die();
-    }
+//    public function login()
+//    {
+//    	View::template("default_1");
+//        if(Input::hasPost("usu"))
+//        {
+//            $usu =new Usuario();
+//            if ($usu->login())
+//                {
+//                    Redirect::to("../../sysmodulo/index");
+//                    Session::set("entrada", "s");
+//                } 
+//                else 
+//                {
+//                    Flash::error("Usuario no reconocido por el sistema");
+//                }            
+//
+//        }
+//    }
+//    
+//    public function salir() {
+//        Auth::destroy_identity();
+//        Redirect::to("../../");
+//        die();
+//    }
     
     public function clave() {
         if(Input::hasPost("clave1"))

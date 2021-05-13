@@ -21,16 +21,30 @@ class Accion extends ActiveRecord
     public function agregar($vec) {
         $vec["perfil_id"] = (int)trim($vec["perfil_id"]);
         $vec["accion"]         = trim($vec["accion"]);
-        
+//        print_r($vec);
+//        die();
+        $this->begin();
         try{
+            
         if(!$this->create($vec))
         {
+            $this->rollback();
             return FALSE;
         }
+        $acceso = new Acceso();
+        $acceso->accion_id = $this->id;
+        $acceso->perfil_id = $vec["perfil_id"];
+        if(!$acceso->create($vec))
+        {
+            $this->rollback();
+            return FALSE;
+        }
+        $this->commit();
         } catch (Exception $k)
         {
             if($this->db->id_connection->errno==1062){
                 Flash::error("Ya se Ingresó esta acción  Para  este Controlador");
+                $this->rollback();
             }else Flash::error ($k->getMessage ());
             return FALSE;
         }

@@ -1,7 +1,7 @@
 
         <div class="row">
             <div class="col-md-10">
-<div class="card card-secondary">
+<div class="card ">
               <div class="card-header text-right">
                   <a class="btn btn-primary" href="<?php echo $link_add?>"> <i class="fa fa-plus"></i> Nuevo Módulo</a>
               </div>
@@ -12,11 +12,12 @@
             <tr>
                 <th>&nbsp;</th>
                 <th>Módulo</th>
-                <th>Menú</th>
+                <th>Link Video</th>
                 <th>Descripción</th>
                 <th>Icono</th>
-                <th>Precio</th>
                 <th>Privado</th>
+                <th>Publicado</th>
+                <th>Inicial</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +34,11 @@
   </div>
 </div>                </td>
                 <td><?php echo $value->modulo?></td>
-                <td><?php echo $value->menu?></td>
+                <td>
+                    <a class="btn btn-outline-primary venobox" href="<?php echo $value->link?>" data-autoplay="true" data-vbtype="video" >
+                        <i class="fab fa-youtube"></i>
+                        Ver </a>
+                </td>
                 <td>
                     <div class="text-break " style="text-overflow: ellipsis; overflow: hidden;max-width: 200px;">
                         <?php echo $value->descripcion?>
@@ -41,12 +46,13 @@
                 </td>
                 <td>
                     <?php if($value->logo){?>
-                    <i class="text-info <?php echo $value->logo?> fa-2x "></i>
+                    <i class="text-primary <?php echo $value->logo?> fa-2x "></i>
                     <?php }?>
                     <?php echo $value->logo?>
                 </td>
-                <td><?php echo $value->precio?></td>
                 <td><?php echo Modulo::$PRIVADO[$value->privado]?></td>
+                <td><?php echo Modulo::$PUBLICADO[$value->publicado]?></td>
+                <td><?php echo Modulo::$INICIAL[$value->inicial]?></td>
             </tr>
             <?php endforeach;?>
         </tbody>
@@ -71,6 +77,7 @@
        "paging": false,
       //"autoWidth": false,
     });
+    
 //    $('#example2').DataTable({
 //      "paging": true,
 //      "lengthChange": false,
@@ -81,6 +88,10 @@
 //      "responsive": true,
 //    });
   });
+  
+$(document).ready(function(){
+    $('.venobox').venobox(); 
+});  
 </script>
 
 

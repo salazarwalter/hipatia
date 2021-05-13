@@ -152,6 +152,7 @@ class Menu extends ActiveRecord
                         menu.color,
                         menu.posicion,
                         accion.accion,
+                        accion.id AS accion_id,
                         controlador.controlador
                 FROM rol INNER JOIN perfil      ON rol.perfil_id         = perfil.id
                          INNER JOIN modulo      ON perfil.modulo_id      = modulo.id
@@ -172,7 +173,7 @@ class Menu extends ActiveRecord
             if($inicio!=$value->modulo)
             {
                 $inicio=$value->modulo;
-                Menu::$LISTA_GRAL_MODULOS[]=$inicio;
+                Menu::$LISTA_GRAL_MODULOS[$value->modulo_id]=$inicio;
             }
         }
         return Menu::$LISTA_GRAL_MENUES;

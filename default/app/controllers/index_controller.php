@@ -9,6 +9,7 @@ class IndexController extends AppController
 
  public function index()
     {
-    	Redirect::to("../../sysusuario/login");
+       View::template("default_1");
+    	//Redirect::to("../../sysusuario/login");
     }
 }

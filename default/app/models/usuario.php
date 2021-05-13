@@ -9,6 +9,8 @@ class Usuario extends ActiveRecord
         public static $FOTO="";
         public static $NOMBRE="";
 
+        public static $LINK_CONFIRMAR="http://localhost/sbase2/sysingreso/confirmar";
+        
         public static function obtenerFotoPerfil() {
             $u = new Usuario();
             $usu = $u->find_by_id(Auth::get("id"));
@@ -34,8 +36,7 @@ class Usuario extends ActiveRecord
                              INNER JOIN controlador ON accion.controlador_id  = controlador.id
 
                     WHERE rol.usuario_id           = ".Auth::get("id")." 
-                      AND acceso.permitido         = 'S' 
-                      AND rol.activo               = 'S' 
+                      AND acceso.permitido         = 'S'
                       AND accion.accion            = '$accion'
                       AND controlador.controlador  = '$controlador'
                     ";

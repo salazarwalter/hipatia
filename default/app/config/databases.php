@@ -8,23 +8,21 @@ return [
         /**
          * host: ip o nombre del host de la base de datos
          */
-        'host'     => 'itswg.com',
+        'host'     => 'localhost',
         /**
          * username: usuario con permisos en la base de datos
          */
-        'username' => 'u467201778_midinero2021us', //no es recomendable usar el usuario root
+        'username' => 'root', //no es recomendable usar el usuario root
         /**
          * password: clave del usuario de la base de datos
          */
-        'password' => 'midinero2021usN5NPNj/1',
+        'password' => 'root',
         /**
          * test: nombre de la base de datos
          */
-<<<<<<< HEAD
-        'name'     => 'u467201778_midinero2021db',
-=======
+
         'name'     => 'sbase2',
->>>>>>> aca58998840928b9912bec631163d7903d4ba5c4
+
         /**
          * type: tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
          */

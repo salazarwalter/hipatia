@@ -19,6 +19,7 @@ abstract class AppController extends Controller
 
     final protected function initialize()
     {
+//        Auth::destroy_identity();
         if(Auth::is_valid()) //esta autenticado?
         {
             $con = $this->controller_name;

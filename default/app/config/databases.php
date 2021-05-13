@@ -8,19 +8,19 @@ return [
         /**
          * host: ip o nombre del host de la base de datos
          */
-        'host'     => 'localhost',
+        'host'     => 'itswg.com',
         /**
          * username: usuario con permisos en la base de datos
          */
-        'username' => 'root', //no es recomendable usar el usuario root
+        'username' => 'u467201778_midinero2021us', //no es recomendable usar el usuario root
         /**
          * password: clave del usuario de la base de datos
          */
-        'password' => 'root',
+        'password' => 'midinero2021usN5NPNj/1',
         /**
          * test: nombre de la base de datos
          */
-        'name'     => 'sbase1',
+        'name'     => 'u467201778_midinero2021db',
         /**
          * type: tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
          */
